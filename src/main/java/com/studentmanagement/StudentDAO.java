@@ -12,7 +12,6 @@ import java.util.List;
 public class StudentDAO {
     private Connection connection;
 
-    // Constructor
     public StudentDAO(Connection connection) {
         this.connection = connection;
     }
@@ -142,7 +141,6 @@ public class StudentDAO {
     // Method to delete a student from the database by ID
     public void deleteStudent(String id) throws SQLException {
         String query = "DELETE FROM Student_QLHS WHERE id = ?";
-
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, id);
             stmt.executeUpdate();

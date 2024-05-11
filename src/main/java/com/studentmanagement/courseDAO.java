@@ -13,7 +13,7 @@ import java.util.Map;
 public class courseDAO {
     private Connection connection;
 
-    // Constructor
+    
     public courseDAO(Connection connection) {
         this.connection = connection;
     }

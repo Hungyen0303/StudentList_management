@@ -8,112 +8,37 @@
 <head>
 <meta charset="UTF-8">
 <title>Student List</title>
-</head>
-<style>
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+<link href = "css/studentList.css" rel= "stylesheet">
+<script>
+function showPopup() {
+    document.getElementById("errorPopup").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
 }
 
-body {
-	width: 100vw;
-	height: 100vh;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	position: relative;
-	font-family: Arial, sans-serif;
+function hidePopup() {
+    document.getElementById("errorPopup").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
 }
+</script>
+ </head>
 
-h2 {
-	margin: 20px 0;
-}
-
-form {
-	margin-top: 10px;
-}
-
-input[type="text"], input[type="submit"] {
-	padding: 8px 15px;
-	margin-right: 10px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-}
-
-input[type="submit"] {
-	background-color: #4CAF50;
-	color: white;
-	cursor: pointer;
-}
-
-input[type="submit"]:hover {
-	background-color: #45a049;
-}
-
-table {
-	border-collapse: collapse;
-	width: 90%;
-	border-radius: 10px;
-}
-
-th, td {
-	border: 1px solid #ddd;
-	padding: 8px;
-	text-align: left;
-}
-
-th {
-	background-color: #f2f2f2;
-	border-radius: 10px;
-}
-
-tr {
-	border-radius: 10px;
-}
-
-tr:nth-child(even) {
-	background-color: #f2f2f2;
-}
-
-tr:hover {
-	background-color: #ddd;
-}
-
-.btn-container {
-	display: flex;
-	margin-top: 20px;
-}
-
-.btn-container form {
-	margin-right: 10px;
-}
-
-.function {
-	display: flex;
-	flex-direction: row;
-}
-
-h2 {
-	color: #4CAF50;
-}
-</style>
 <body>
 	<%
+	
+	String delete_noti = request.getParameter("delete_noti");
     String sortType = request.getParameter("sortType");
     String searchName = request.getParameter("searchName");
     String url = "jdbc:postgresql://localhost:5432/QLHS"; // 
 	String username = "y"; 
 	String password = "123"; 
 	List<Student> students = new ArrayList<>();
+
 	try {
 	
     Class.forName("org.postgresql.Driver");
     Connection connection = DriverManager.getConnection(url, username, password);
 
     if (connection != null) {
-        System.out.println("Connected to PostgreSQL database successfully.");
         StudentDAO stu_dao = new StudentDAO(connection) ; 
         students = stu_dao.getAllStudents();
         connection.close();
@@ -141,7 +66,12 @@ h2 {
     %>
 
 	<h2>Student List</h2>
-
+	<div class="popup" id="errorPopup"  >
+    <h2>An error occurred while deleting the student. Please try again later.</h2>
+    <button onclick="hidePopup()">Close</button>
+    <button> Continue </button>
+	</div>
+	<div class="overlay" id="overlay"></div>
 
 	<table border="1">
 		<tr>
@@ -172,6 +102,12 @@ h2 {
 				<form action="deleteStudentServlet" method="post">
 					<input type="hidden" name="id" value="<%= student.getId() %>">
 					<input type="submit" value="Delete">
+					<%
+					if (delete_noti != null && delete_noti.equals("error")) 
+					{
+						out.println("<script>showPopup();</script>");
+					}
+					%>
 				</form>
 			</td>
 		</tr>

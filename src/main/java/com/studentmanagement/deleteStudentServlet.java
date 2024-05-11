@@ -33,15 +33,15 @@ public class deleteStudentServlet extends HttpServlet {
                 StudentDAO stu_dao = new StudentDAO(connection) ; 
                 stu_dao.deleteStudent(id);
                 String link_to_studentLIst= "http://localhost:8080/demo/studentList.jsp";
-                
                 response.sendRedirect(link_to_studentLIst);
                 connection.close();
             }} catch (ClassNotFoundException e) {
             System.out.println("PostgreSQL JDBC driver not found.");
             e.printStackTrace();} 
         	catch (SQLException e) {
-            System.out.println("Failed to connect to PostgreSQL database.");
-            System.out.println("Error: " + e.getMessage());} 
+            System.out.println("Error: " + e.getMessage());
+            response.sendRedirect("http://localhost:8080/demo/studentList.jsp?delete_noti=error");
+            } 
           
     	
     }
