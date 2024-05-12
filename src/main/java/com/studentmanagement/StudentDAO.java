@@ -140,7 +140,12 @@ public class StudentDAO {
 
     // Method to delete a student from the database by ID
     public void deleteStudent(String id) throws SQLException {
+    	String query1 = "DELETE FROM course_student_QLHS WHERE student_id = ?"; 
         String query = "DELETE FROM Student_QLHS WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, id);
+            stmt.executeUpdate();
+        }
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, id);
             stmt.executeUpdate();

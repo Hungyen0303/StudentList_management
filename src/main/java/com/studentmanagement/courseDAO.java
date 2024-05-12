@@ -73,6 +73,7 @@ public class courseDAO {
 
         return stud;
     }
+   
     public List<Course_student> getAllSets(String year) throws SQLException {
         List<Course_student> stud = new ArrayList<>();
         String query = null; 
@@ -309,5 +310,18 @@ public class courseDAO {
         }
     }
     
+    public int countCourseAStudentTake(String id) throws SQLException {
+        String query = "SELECT COUNT(*) FROM course_student_qlhs AS cs WHERE cs.student_id = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        }
+        return -1;
+    }
 
 }

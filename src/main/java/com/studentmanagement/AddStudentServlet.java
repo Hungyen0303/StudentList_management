@@ -33,6 +33,11 @@ public class AddStudentServlet extends HttpServlet {
         String url = "jdbc:postgresql://localhost:5432/QLHS"; 
     	String username = "y"; 
     	String password = "123"; 
+    	if (id.length() != 8 ) 
+    	{
+    	   String link_to_studentLIst= "http://localhost:8080/demo/addStudent.jsp?id=invalid";
+    	   response.sendRedirect(link_to_studentLIst);
+    	}
     	try {
     	
         Class.forName("org.postgresql.Driver");

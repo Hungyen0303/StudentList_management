@@ -1,10 +1,9 @@
 package com.studentmanagement;
-
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +18,7 @@ public class deleteStudentServlet extends HttpServlet {
             throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
             String id = request.getParameter("id");
-     
+           
             String url = "jdbc:postgresql://localhost:5432/QLHS"; 
         	String username = "y"; 
         	String password = "123"; 
@@ -40,9 +39,7 @@ public class deleteStudentServlet extends HttpServlet {
             e.printStackTrace();} 
         	catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
-            response.sendRedirect("http://localhost:8080/demo/studentList.jsp?delete_noti=error");
+         
             } 
-          
-    	
-    }
+        	}
 }

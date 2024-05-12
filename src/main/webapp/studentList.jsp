@@ -3,30 +3,29 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.studentmanagement.Student"%>
 <%@ page import="com.studentmanagement.StudentDAO"%>
+<%@ page import="com.studentmanagement.courseDAO"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Student List</title>
-<link href = "css/studentList.css" rel= "stylesheet">
-<script>
-function showPopup() {
-    document.getElementById("errorPopup").style.display = "block";
-    document.getElementById("overlay").style.display = "block";
-}
+<!--  add bootstrap  -->
 
-function hidePopup() {
-    document.getElementById("errorPopup").style.display = "none";
-    document.getElementById("overlay").style.display = "none";
-}
-</script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Link to css file  -->
+
+<link href = "css/studentList.css" rel= "stylesheet">
+<!-- Link to js file  -->
+
+<script src = "js/studentList.js"></script>
  </head>
 
 <body>
 	<%
 	
-	String delete_noti = request.getParameter("delete_noti");
-    String sortType = request.getParameter("sortType");
+	String sortType = request.getParameter("sortType");
     String searchName = request.getParameter("searchName");
     String url = "jdbc:postgresql://localhost:5432/QLHS"; // 
 	String username = "y"; 
@@ -41,6 +40,7 @@ function hidePopup() {
     if (connection != null) {
         StudentDAO stu_dao = new StudentDAO(connection) ; 
         students = stu_dao.getAllStudents();
+        
         connection.close();
     }} catch (ClassNotFoundException e) {
     System.out.println("PostgreSQL JDBC driver not found.");
@@ -66,12 +66,17 @@ function hidePopup() {
     %>
 
 	<h2>Student List</h2>
-	<div class="popup" id="errorPopup"  >
-    <h2>An error occurred while deleting the student. Please try again later.</h2>
-    <button onclick="hidePopup()">Close</button>
-    <button> Continue </button>
+	<div class='popup' id='errorPopup' >
+    <h2>Học sinh này vẫn đang trong một số lớp học, nếu xoá thì sẽ xoá luôn trong danh sách các lớp học đấy </h2>
+	<p> Bạn có muốn tiếp tục xoá  </p>
+    <button onclick='hidePopup()'>Close</button>
+    <form action="deleteStudentServlet" method="post">
+    	<input type="hidden" id="studentId" name="id" value = "">
+		<input type="submit" value="Continue">
+	</form>
+	
 	</div>
-	<div class="overlay" id="overlay"></div>
+    <div class='overlay' id='overlay'></div>
 
 	<table border="1">
 		<tr>
@@ -99,16 +104,7 @@ function hidePopup() {
 			</td>
 			<!-- Button to delete a student -->
 			<td>
-				<form action="deleteStudentServlet" method="post">
-					<input type="hidden" name="id" value="<%= student.getId() %>">
-					<input type="submit" value="Delete">
-					<%
-					if (delete_noti != null && delete_noti.equals("error")) 
-					{
-						out.println("<script>showPopup();</script>");
-					}
-					%>
-				</form>
+				<button class="btn btn btn-danger" onclick='showPopup(<%= student.getId() %>)'> Delete </button>
 			</td>
 		</tr>
 		<% } %>
@@ -131,12 +127,14 @@ function hidePopup() {
 
 		<!-- Buttons to sort by name -->
 		<form action="studentList.jsp" method="get">
-			<input type="hidden" name="sortType" value="asc"> <input
-				type="submit" value="Sort by Name ASC">
+			<input type="hidden" name="sortType" value="asc"> 
+			<input type="hidden" name="searchName"  value="<%= searchName != null ? searchName : "" %>"> 
+			<input type="submit" value="Sort by Name ASC">
 		</form>
 		<form action="studentList.jsp" method="get">
-			<input type="hidden" name="sortType" value="desc"> <input
-				type="submit" value="Sort by Name DESC">
+			<input type="hidden" name="sortType" value="desc"> 
+			<input type="hidden" name="searchName"  value="<%= searchName != null ? searchName : "" %>"> 
+			<input type="submit" value="Sort by Name DESC">
 		</form>
 	</div>
 

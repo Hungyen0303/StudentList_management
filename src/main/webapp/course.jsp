@@ -10,86 +10,12 @@
 <meta charset="UTF-8">
 <title>Course List</title>
 </head>
-<style>
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
+<!--  add bootstrap  -->
 
-body {
-	width: 100vw;
-	height: 100vh;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	position: relative;
-	font-family: Arial, sans-serif;
-}
-
-h2 {
-	margin: 20px 0;
-}
-
-form {
-	margin-top: 10px;
-}
-
-input[type="text"], input[type="submit"] {
-	padding: 8px 15px;
-	margin-right: 10px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-}
-
-input[type="submit"] {
-	background-color: #4CAF50;
-	color: white;
-	cursor: pointer;
-}
-
-input[type="submit"]:hover {
-	background-color: #45a049;
-}
-
-table {
-	border-collapse: collapse;
-	width: 90%;
-}
-
-th, td {
-	border: 1px solid #ddd;
-	padding: 8px;
-	text-align: left;
-}
-
-th {
-	background-color: #f2f2f2;
-}
-
-tr:nth-child(even) {
-	background-color: #f2f2f2;
-}
-
-tr:hover {
-	background-color: #ddd;
-}
-
-.btn-container {
-	display: flex;
-	margin-top: 20px;
-}
-
-.btn-container form {
-	margin-right: 10px;
-}
-
-.function {
-	display: flex;
-	flex-direction: row;
-}
-</style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- link to css  -->
+<link href = "css/course.css"  rel= "stylesheet"> 
 <body>
 	<%
 	String url = "jdbc:postgresql://localhost:5432/QLHS"; // 
