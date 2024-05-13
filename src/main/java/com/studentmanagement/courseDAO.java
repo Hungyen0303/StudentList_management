@@ -292,8 +292,12 @@ public class courseDAO {
     }
     // Method to delete a course from the database by ID
     public void deleteCourse(String id) throws SQLException {
-        String query = "DELETE FROM course_QLHS WHERE id = ?";
-
+    	String query1 = "DELETE FROM course_student_QLHS WHERE course_id = ?"; 
+        String query = "DELETE FROM course_qlhs WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query1)) {
+            stmt.setString(1, id);
+            stmt.executeUpdate();
+        }
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, id);
             stmt.executeUpdate();

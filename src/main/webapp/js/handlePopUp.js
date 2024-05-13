@@ -4,7 +4,7 @@
 function showPopup(id) {
     document.getElementById("errorPopup").style.display = "block";
     document.getElementById("overlay").style.display = "block";
-    document.getElementById("studentId").value = id;
+    document.getElementById("id").value = id;
 }
 
 function hidePopup() {
@@ -12,6 +12,3 @@ function hidePopup() {
     document.getElementById("overlay").style.display = "none";
 }
 
-function delete_student(id) {
-	showPopup(id); 
-}

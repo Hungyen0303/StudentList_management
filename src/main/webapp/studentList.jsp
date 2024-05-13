@@ -17,9 +17,10 @@
 <!-- Link to css file  -->
 
 <link href = "css/studentList.css" rel= "stylesheet">
+<link href = "css/PopUp.css" rel= "stylesheet">
 <!-- Link to js file  -->
 
-<script src = "js/studentList.js"></script>
+<script src = "js/handlePopUp.js"></script>
  </head>
 
 <body>
@@ -68,10 +69,10 @@
 	<h2>Student List</h2>
 	<div class='popup' id='errorPopup' >
     <h2>Học sinh này vẫn đang trong một số lớp học, nếu xoá thì sẽ xoá luôn trong danh sách các lớp học đấy </h2>
-	<p> Bạn có muốn tiếp tục xoá  </p>
+	<p> Bạn có muốn tiếp tục xoá </p>
     <button onclick='hidePopup()'>Close</button>
     <form action="deleteStudentServlet" method="post">
-    	<input type="hidden" id="studentId" name="id" value = "">
+    	<input type="hidden" id="id" name="id" value = "">
 		<input type="submit" value="Continue">
 	</form>
 	

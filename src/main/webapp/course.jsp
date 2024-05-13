@@ -16,6 +16,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- link to css  -->
 <link href = "css/course.css"  rel= "stylesheet"> 
+<link href = "css/PopUp.css"  rel= "stylesheet"> 
+
+<script src = "js/handlePopUp.js"></script>
 <body>
 	<%
 	String url = "jdbc:postgresql://localhost:5432/QLHS"; // 
@@ -23,14 +26,9 @@
 	String password = "123"; 
 	List<course> course_list = new ArrayList<>();
 	try {
-	
     Class.forName("org.postgresql.Driver");
-
-   
     Connection connection = DriverManager.getConnection(url, username, password);
-
     if (connection != null) {
-        System.out.println("Connected to PostgreSQL database successfully.");
         courseDAO course_dao = new courseDAO(connection) ; 
         course_list = course_dao.getAllCourse(); 
         connection.close();
@@ -39,6 +37,7 @@
     e.printStackTrace();} catch (SQLException e) {
     System.out.println("Failed to connect to PostgreSQL database.");
     System.out.println("Error: " + e.getMessage());}
+	
     String sortType = request.getParameter("sortType");
     String searchName = request.getParameter("searchName");
     String searchYear = request.getParameter("searchYear");
@@ -47,6 +46,7 @@
     if (sortType != null && (sortType.equals("asc") || sortType.equals("desc"))) {
         Collections.sort(course_list, sortType.equals("desc") ? Comparator.comparing(course::getName).reversed() : Comparator.comparing(course::getName));
     }
+    
 
     // Nếu có yêu cầu tìm kiếm theo tên, lọc danh sách lớp học phù hợp
     if (searchName != null && !searchName.isEmpty()) {
@@ -58,10 +58,11 @@
         }
         course_list = filteredcourse;
     }
-    if (searchYear != null && !searchName.isEmpty()) {
+   
+    if (searchYear != null && !searchYear.isEmpty()) {
         List<course> filteredcourse = new ArrayList<>();
         for (course course : course_list) {
-            if (course.getyear().toLowerCase().contains(searchName.toLowerCase())) {
+            if (course.getyear().toLowerCase().contains(searchYear.toLowerCase())) {
                 filteredcourse.add(course);
             }
         }
@@ -69,9 +70,25 @@
     }
 %>
 
+
+
+
+
+
 	<h2>course List</h2>
 
-	<!-- Button to add a new course -->
+	<!-- Pop up to confirm delete course   -->
+	<div class='popup' id='errorPopup' >
+	<p> Bạn có chắc chắn xoá khoá học này ? </p>
+    <button class = "btn btn-secondary"onclick='hidePopup()'>Close</button>
+    <form action="deletecourseServlet" method="post">
+    	<input type="hidden" id="id" name="id" value = "">
+		<input type="submit" value="Continue">
+	</form>
+	
+	</div>
+	<div class='overlay' id='overlay'></div>
+	
 
 
 
@@ -101,10 +118,7 @@
 			</td>
 			<!-- Button to delete a course -->
 			<td>
-				<form action="deletecourseServlet" method="post">
-					<input type="hidden" name="id" value="<%= c.getId() %>"> <input
-						type="submit" value="Delete">
-				</form>
+			<button type = "button" onclick = 'showPopup("<%= c.getId() %>")' class = "btn btn-danger"> Delete </button>
 			</td>
 			<td>
 				<form action="StudentlistFiltered.jsp" method="post">
@@ -122,27 +136,37 @@
 		<form action="addcourse.jsp">
 			<input type="submit" value="Add course">
 		</form>
-
-		<!-- Search by name -->
+		
 		<form action="course.jsp" method="get">
+				<!-- search by name   -->
 			<input type="text" name="searchName" placeholder="Search by Name"
-				value="<%= searchName != null ? searchName : "" %>"> <input
-				type="submit" value="Search">
-		</form>
-		<!-- Search by year -->
-		<form action="course.jsp" method="get">
+				value="<%= searchName != null ? searchName : "" %>"> 
+				<input type="submit" value="Search">
+			<!-- search by year  -->
 			<input type="text" name="searchYear" placeholder="Search by Year"
-				value="<%= searchYear != null ? searchYear : "" %>"> <input
-				type="submit" value="Search">
-		</form>
-		<!-- Buttons to sort by name -->
-		<form action="course.jsp" method="get">
-			<input type="hidden" name="sortType" value="asc"> <input
-				type="submit" value="Sort by Name ASC">
+				value="<%= searchYear != null ? searchYear : "" %>"> 
+			<input type="submit" value="Search">	
+			
 		</form>
 		<form action="course.jsp" method="get">
-			<input type="hidden" name="sortType" value="desc"> <input
-				type="submit" value="Sort by Name DESC">
+				<!-- search by name   -->
+			<input type="hidden" name="searchName" value="<%= searchName != null ? searchName : "" %>"> 
+			<!-- search by year  -->
+			<input type="hidden" name="searchYear"  value="<%= searchYear != null ? searchYear : "" %>"> 
+			<!-- sort type  -->
+			<input type="hidden" name="sortType" value="asc"> 
+			<input type="submit" value="Sort by Name ASC">
+			
+		</form>
+		<form action="course.jsp" method="get">
+				<!-- search by name   -->
+			<input type="hidden" name="searchName" value="<%= searchName != null ? searchName : "" %>"> 
+			<!-- search by year  -->
+			<input type="hidden" name="searchYear"  value="<%= searchYear != null ? searchYear : "" %>"> 
+			<!-- sort type  -->
+			<input type="hidden" name="sortType" value="desc"> 
+			<input type="submit" value="Sort by Name DESC">
+			
 		</form>
 	</div>
 </body>

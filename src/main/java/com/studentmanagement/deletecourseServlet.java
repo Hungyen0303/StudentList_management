@@ -19,7 +19,6 @@ public class deletecourseServlet extends HttpServlet {
             throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
             String id = request.getParameter("id");
-     
             String url = "jdbc:postgresql://localhost:5432/QLHS"; 
         	String username = "y"; 
         	String password = "123"; 
@@ -30,13 +29,10 @@ public class deletecourseServlet extends HttpServlet {
             Connection connection = DriverManager.getConnection(url, username, password);
 
             if (connection != null) {
-                System.out.println("Connected to PostgreSQL database successfully.");
-                
                 courseDAO stu_dao = new courseDAO(connection) ; 
                 stu_dao.deleteCourse(id);
-//                String link_to_studentLIst= "http://localhost:8080/demo/course.jsp";
-//                
-//                response.sendRedirect(link_to_studentLIst);
+                String link_to_studentLIst= "http://localhost:8080/demo/course.jsp";                
+                response.sendRedirect(link_to_studentLIst);
                 connection.close();
             }} catch (ClassNotFoundException e) {
             System.out.println("PostgreSQL JDBC driver not found.");
