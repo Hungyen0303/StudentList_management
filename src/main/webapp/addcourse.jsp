@@ -51,37 +51,7 @@ input[type="submit"]:hover {
 	background-color: #45a049;
 }
 
-table {
-	border-collapse: collapse;
-	width: 100%;
-}
 
-th, td {
-	border: 1px solid #ddd;
-	padding: 8px;
-	text-align: left;
-}
-
-th {
-	background-color: #f2f2f2;
-}
-
-tr:nth-child(even) {
-	background-color: #f2f2f2;
-}
-
-tr:hover {
-	background-color: #ddd;
-}
-
-.btn-container {
-	display: flex;
-	margin-top: 20px;
-}
-
-.btn-container form {
-	margin-right: 10px;
-}
 </style>
 <body>
 	

@@ -8,31 +8,18 @@ body {
 	width: 100vw;
 	height: 100vh;
 	display: flex;
-	flex-direction: column;
+	align-items: center;
 	justify-content: center;
-	align-items: center;
 	font-family: Arial, sans-serif;
-	background: linear-gradient( to left ,#80bdfe , #000 );
+	background: linear-gradient(109.5deg, rgb(76, 221, 242) 11.2%, rgb(92, 121, 255) 91.1%);
 }
 
-.main {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	top: 0;
-}
-
-.img
-{
-	background-image: url(../resource/cute-little-boy-student.jpg);
-	object-fit: cover;
-	z-index: -1;
-}
 
 .title h1, .title h2 {
 	margin-bottom: 20px;
 	text-align: center;
-	color: #333; /* Dark grey text color */
+	color: #fff;
+	font-weight: 500;
 	
 }
 
@@ -53,3 +40,12 @@ input[type="submit"] {
 input[type="submit"]:hover {
 	background-color: #45a049;
 }
+
+.btn-group
+{
+	display: flex;
+	flex-direction: column;
+}
+
+
+

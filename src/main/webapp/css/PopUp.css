@@ -8,7 +8,6 @@
     transform: translate(-50%, -50%);
     background-color: #fff;
     padding: 20px;
-    border: 2px solid #f00;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     z-index: 9999;
@@ -27,19 +26,40 @@
 .popup h2 
 {
 	color: black;
+	font-weight: 200;
+	font-size: 20px;
 }
-#errorPopup button
+input.button-continue
+{
+	padding: 0;
+	margin: 0;
+}
+
+input.button-continue,#errorPopup button
 {
 	background-color: #45a049;
 	border: none;
 	padding: 10px 20px;
 	margin: 5px 25px;
-	border-radius: 15px;
+	border-radius: 10px;
 	color: white;
 }
-#errorPopup button:hover
+input.button-continue, #errorPopup button
 {
 	cursor: pointer; 
 	transform:scale(1.1);
 	transition: all 0.25s ease;
+	font-size: 15px;
+}
+#errorPopup button
+{
+	background-color: #8d8080;
+}
+.gr-button 
+{
+	position: absolute;
+    bottom: 20px; 
+    right: 20px;  
+    display: flex;
+    gap: 10px;    
 }

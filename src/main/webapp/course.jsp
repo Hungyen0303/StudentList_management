@@ -75,19 +75,19 @@
 
 
 
-	<h2>course List</h2>
+	<h2>
+	Course List</h2>
 
-	<!-- Pop up to confirm delete course   -->
 	<div class='popup' id='errorPopup' >
-	<p> Bạn có chắc chắn xoá khoá học này ? </p>
-    <button class = "btn btn-secondary"onclick='hidePopup()'>Close</button>
-    <form action="deletecourseServlet" method="post">
-    	<input type="hidden" id="id" name="id" value = "">
-		<input type="submit" value="Continue">
-	</form>
-	
+		<p> Bạn có chắc chắn xoá khoá học này ? </p>
+		<div class= "d-flex gr-button">  
+			<button onclick='hidePopup()'>Close</button>
+		    <form action="deleteStudentServlet" method="post">
+		    	<input type="hidden" id="id" name="id" value = "">
+				<input class="button-continue" type="submit" value="Continue">
+			</form>
+		</div>
 	</div>
-	<div class='overlay' id='overlay'></div>
 	
 
 
@@ -111,20 +111,21 @@
 			<td><%= c.getNotes() %></td>
 			<!-- Button to update a course -->
 			<td>
+				<div class= "button-group">
+				
 				<form action="updatecourse.jsp">
-					<input type="hidden" name="id" value="<%= c.getId() %>"> <input
+					<input type="hidden" name="id" value="<%= c.getId() %>"> 
+					<input class = "button button-update"
 						type="submit" value="Update">
 				</form>
-			</td>
-			<!-- Button to delete a course -->
-			<td>
-			<button type = "button" onclick = 'showPopup("<%= c.getId() %>")' class = "btn btn-danger"> Delete </button>
-			</td>
-			<td>
+				
+				<button class= "button button-delete" type = "button" onclick = 'showPopup("<%= c.getId() %>")' class = "btn btn-danger"> Delete </button>
+				
 				<form action="StudentlistFiltered.jsp" method="post">
 					<input type="hidden" name="id" value="<%= c.getId() %>"> <input
 						type="submit" value="See all students">
 				</form>
+				</div>
 			</td>
 		</tr>
 		<% } %>
@@ -168,6 +169,6 @@
 			<input type="submit" value="Sort by Name DESC">
 			
 		</form>
-	</div>
+	</div>	 	
 </body>
 </html>

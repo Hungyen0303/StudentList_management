@@ -9,9 +9,7 @@ import javax.servlet.http.*;
 
 @WebServlet (urlPatterns = "/AddStudentToCourseServlet")
 public class AddStudentToCourseServlet extends HttpServlet {
-    /**
-	 * 
-	 */
+    
 	private static final long serialVersionUID = 1L;
 
 	

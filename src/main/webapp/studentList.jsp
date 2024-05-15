@@ -1,5 +1,4 @@
-<%@ page
-	import="java.util.ArrayList, java.util.Date, java.util.List, java.sql.Connection, java.sql.DriverManager, java.sql.SQLException, java.util.Collections, java.util.Comparator"%>
+<%@ page import="java.util.ArrayList, java.util.Date, java.util.List, java.sql.Connection, java.sql.DriverManager, java.sql.SQLException, java.util.Collections, java.util.Comparator"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.studentmanagement.Student"%>
 <%@ page import="com.studentmanagement.StudentDAO"%>
@@ -66,27 +65,36 @@
     // Nếu có yêu cầu tìm kiếm theo tên, lọc danh sách sinh viên phù hợp
     %>
 
-	<h2>Student List</h2>
+	<h2><strong>Student List</strong></h2>
+	
+	<!-- Pop up to confirm delete or not  -->
 	<div class='popup' id='errorPopup' >
-    <h2>Học sinh này vẫn đang trong một số lớp học, nếu xoá thì sẽ xoá luôn trong danh sách các lớp học đấy </h2>
+
 	<p> Bạn có muốn tiếp tục xoá </p>
-    <button onclick='hidePopup()'>Close</button>
+	<div class= "d-flex gr-button">  
+	<button onclick='hidePopup()'>Close</button>
     <form action="deleteStudentServlet" method="post">
     	<input type="hidden" id="id" name="id" value = "">
-		<input type="submit" value="Continue">
+		<input class="button-continue" type="submit" value="Continue">
 	</form>
-	
+	</div>
+  
 	</div>
     <div class='overlay' id='overlay'></div>
 
-	<table border="1">
+	
+	<div class = "container-xxl">
+	
+	
+	
+	<table class="table table-striped"  border="1">
 		<tr>
 			<th>ID</th>
 			<th>Name</th>
 			<th>Date of Birth</th>
 			<th>Address</th>
 			<th>Notes</th>
-			<th>Actions</th>
+			<th></th>
 		</tr>
 		<!-- Iterate through the list of students -->
 		<% for (Student student : students) { %>
@@ -98,18 +106,29 @@
 			<td><%= student.getNotes() %></td>
 			<!-- Button to update a student -->
 			<td>
-				<form method="post" action="updateStudent.jsp">
-					<input type="hidden" name="id" value="<%= student.getId() %>">
-					<input type="submit" value="Update">
-				</form>
+			
+				<div class= "button-group">
+					<!-- Button to update a student -->
+					<form   method="post" action="updateStudent.jsp">
+						<input type="hidden" name="id" value="<%= student.getId() %>">
+						<input class="button button-update" type="submit" value="Update">
+					</form>
+					<!-- Button to delete a student -->
+					<button class="button button-delete" onclick='showPopup(<%= student.getId() %>)'> Delete </button>
+				</div>
+				
 			</td>
-			<!-- Button to delete a student -->
-			<td>
-				<button class="btn btn btn-danger" onclick='showPopup(<%= student.getId() %>)'> Delete </button>
-			</td>
+			
+			
 		</tr>
 		<% } %>
 	</table>
+	
+	
+	
+	
+	
+	
 	<div class="function">
 		<form action="index.jsp">
 			<input type="submit" value="Back to main">
@@ -137,6 +156,7 @@
 			<input type="hidden" name="searchName"  value="<%= searchName != null ? searchName : "" %>"> 
 			<input type="submit" value="Sort by Name DESC">
 		</form>
+	</div>
 	</div>
 
 </body>

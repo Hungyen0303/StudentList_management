@@ -17,11 +17,10 @@ body {
 
 h2 {
 	margin: 20px 0;
+	font-weight: 500;
 }
 
-form {
-	margin-top: 10px;
-}
+
 
 input[type="text"], input[type="submit"] {
 	padding: 8px 15px;
@@ -34,6 +33,7 @@ input[type="submit"] {
 	background-color: #4CAF50;
 	color: white;
 	cursor: pointer;
+	border: none;
 }
 
 input[type="submit"]:hover {
@@ -69,23 +69,45 @@ tr:hover {
 	background-color: #ddd;
 }
 
-.btn-container {
+.button-group
+{
 	display: flex;
-	margin-top: 20px;
+	flex-direction: row;
+	justify-content:start;
 }
 
-.btn-container form {
-	margin-right: 10px;
+.button
+{
+	border: none;
+	
+}
+
+.button-update
+{
+	background-color:  rgb(76, 175, 80);	
+	color: white;
+	font-weight: 100;
+	border-radius: 5px;
+}
+.button-delete 
+{
+	background-color: rgb(220, 53, 69);
+	color: white;
+	font-weight: 100;
+	border-radius: 5px;
+	padding: 0 8px;
 }
 
 .function {
 	display: flex;
-	flex-direction: row;
+	flex-direction: row;	
 }
 
 h2 {
 	color: #4CAF50;
 }
+
+
 
 
 
