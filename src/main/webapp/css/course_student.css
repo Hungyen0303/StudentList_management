@@ -1,0 +1,97 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	width: 100vw;
+	height: 100vh;
+	font-family: Arial, sans-serif;
+	background-color: #f3f4f6;
+
+}
+
+h2 {
+	color: #4CAF50;
+	font-weight: 500;
+	margin-bottom: 20px;
+}
+
+form {
+	margin-top: 10px;
+}
+
+.btn__seecourse {
+	padding: 8px 15px;
+	margin-right: 10px;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	background-color: #45a049;
+	color: white;
+	cursor: pointer;
+	transition: background-color 0.3s ease; 
+}
+
+
+
+
+.function {
+	display: flex;
+	flex-direction: row;
+	margin-top: 20px;
+	position: fixed;
+	top: 0;
+	right: 0;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.function form {
+	margin-right: 10px;
+	margin-top: 0;
+}
+
+
+.button-search, .back-button
+{
+	background-color: #deca00;
+	padding: 10px 10px;
+	border-radius: 10px;
+	border: none;
+	color: white;
+}
+.back-button input
+{
+	background-color: #ccc;
+	border-radius: 10px;
+	border: none;
+	color : white;
+}
+.back-button
+{
+	background-color: #ccc;
+}
+input[name="searchYear"] 
+{
+	padding: 10px 10px;
+	border-radius: 10px;
+}
+.stick
+{
+	position: sticky;
+	top: 0;
+}
+
+.container 
+{
+	margin-top: 40px;
+}
+
+h2
+{
+	font-weight: 500;
+}
+
+
+

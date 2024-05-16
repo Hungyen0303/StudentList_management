@@ -130,6 +130,7 @@
 		</tr>
 		<% } %>
 	</table>
+	<div class = "btn-group">
 	<div class="function">
 		<form action="index.jsp">
 			<input type="submit" value="Back to main">
@@ -169,6 +170,8 @@
 			<input type="submit" value="Sort by Name DESC">
 			
 		</form>
+	</div>
+	
 	</div>	 	
 </body>
 </html>

@@ -22,7 +22,8 @@ public class AddStudentServlet extends HttpServlet {
 	 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
+	    response.setCharacterEncoding("UTF-8");
 
 
         String id = request.getParameter("id");
@@ -33,10 +34,22 @@ public class AddStudentServlet extends HttpServlet {
         String url = "jdbc:postgresql://localhost:5432/QLHS"; 
     	String username = "y"; 
     	String password = "123"; 
-    	if (id.length() != 8 ) 
+    	/*check valid info */
+    
+    	String current_info = "&id=" + id + "&name="  + name + "&dob="+dob + 
+    			"&address="+ address + "&notes=" + notes; 
+    	System.out.println(current_info);
+    	if ( name.length()==0 || dob.length() == 0 || address.length() == 0 ) 
     	{
-    	   String link_to_studentLIst= "http://localhost:8080/demo/addStudent.jsp?id=invalid";
-    	   response.sendRedirect(link_to_studentLIst);
+    		String link_to_studentLIst= "http://localhost:8080/demo/addStudent.jsp?valid=blank"+ current_info;
+            response.sendRedirect(link_to_studentLIst);
+            return ; 
+    	}
+    	if (id.trim().length()!=8 ) 
+    	{
+    		String link_to_studentLIst= "http://localhost:8080/demo/addStudent	.jsp?valid=id" + current_info;
+            response.sendRedirect(link_to_studentLIst);
+            return ; 
     	}
     	try {
     	
@@ -46,8 +59,6 @@ public class AddStudentServlet extends HttpServlet {
         if (connection != null) {
         	
             StudentDAO stu_dao = new StudentDAO(connection) ; 
-            
-            
             stu_dao.addStudent(id, name, dob, address, notes);
             
             PrintWriter out = response.getWriter();

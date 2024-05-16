@@ -10,85 +10,15 @@
 <meta charset="UTF-8">
 <title>Student List</title>
 </head>
-<style>
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
 
-body {
-	width: 100vw;
-	height: 100vh;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	font-family: Arial, sans-serif;
-	background-color: #f3f4f6;
-}
+<!--  add bootstrap  -->
 
-h2 {
-	margin: 20px 0;
-	color: #333;
-}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-form {
-	margin-top: 10px;
-}
 
-input[type="text"], input[type="submit"] {
-	padding: 8px 15px;
-	margin-right: 10px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-}
-
-input[type="submit"] {
-	background-color: #4CAF50;
-	color: white;
-	cursor: pointer;
-	transition: background-color 0.3s ease; /* Smooth transition */
-}
-
-input[type="submit"]:hover {
-	background-color: #45a049;
-}
-
-table {
-	border-collapse: collapse;
-	width: 90%;
-	margin-top: 20px;
-}
-
-th, td {
-	border: 1px solid #ddd;
-	padding: 8px;
-	text-align: left;
-}
-
-th {
-	background-color: #f2f2f2;
-}
-
-tr:nth-child(even) {
-	background-color: #f2f2f2;
-}
-
-tr:hover {
-	background-color: #ddd;
-}
-
-.function {
-	display: flex;
-	flex-direction: row;
-	margin-top: 20px;
-}
-
-.function form {
-	margin-right: 10px;
-}
-</style>
+<!-- link to css file -->
+<link href="css/course_student.css" rel= "stylesheet">
 <body>
 	<%
 
@@ -115,56 +45,62 @@ tr:hover {
    
  
 %>
-
-	<h2>Lớp học và học sinh</h2>
-
-
-	<table border="1">
-		<tr>
-			<th>ID</th>
-			<th>Name Student</th>
-			<th>Name Course</th>
-			<th>Grade</th>
-			<th>Year</th>
-
-		</tr>
-		<!-- Iterate through the list of students -->
-		<% for (Course_student cs : course_student_list) { %>
-		<tr>
-			<td><%= cs.getId() %></td>
-			<td><%= cs.getStudent_id() %></td>
-			<td><%= cs.getcourse_id() %></td>
-			<td><%= cs.getGrade() %></td>
-			<td><%= cs.getYear() %></td>
-
-
-
-			<td>
-				<form method="post" action="seeCourseAndGrade.jsp">
-					<input type="hidden" name="id_student"
-						value="<%= cs.getStudent_id() %>"> <input type="submit"
-						value="See course and grade">
-				</form>
-			</td>
-
-
-		</tr>
-		<% } %>
-	</table>
-	<div class="function">
-		<form action="index.jsp">
-			<input type="submit" value="Back to main">
-		</form>
-
-
-		<!-- Search by year -->
-		<form action="course_student.jsp" method="post">
-			<input type="text" name="searchYear" placeholder="Search by Year"
-				value="<%= searchYear %>"> <input type="submit"
-				value="Search">
-		</form>
-
+	<div class="container">
+	
+		<h2 class= "text-center">Lớp học và học sinh</h2>
+	
+	
+		<table class="table">
+			<tr class="stick">
+				<th>ID</th>
+				<th>Name Student</th>
+				<th>Name Course</th>
+				<th>Grade</th>
+				<th>Year</th>
+	
+			</tr>
+			<!-- Iterate through the list of students -->
+			<% for (Course_student cs : course_student_list) { %>
+			<tr>
+				<td><%= cs.getId() %></td>
+				<td><%= cs.getStudent_id() %></td>
+				<td><%= cs.getcourse_id() %></td>
+				<td><%= cs.getGrade() %></td>
+				<td><%= cs.getYear() %></td>
+	
+	
+	
+				<td>
+					<form method="post" action="seeCourseAndGrade.jsp" >
+						<input type="hidden" name="id_student"
+							value="<%= cs.getStudent_id() %>"> 
+							<input class="btn__seecourse" type="submit"
+							value="See course and grade">
+					</form>
+				</td>
+			</tr>
+			<% } %>
+		</table>
+		
+		
+		<div class="function">
+			<form class="back-button" action="index.jsp">
+				<input type="submit" value="Back to main">
+			</form>
+	
+	
+			<!-- Search by year -->
+			<form action="course_student.jsp" method="post">
+				<input type="text" name="searchYear" placeholder="Search by Year"
+					value="<%= searchYear %>"> 
+					<input class="button-search" type="submit" value="Search">
+			</form>
+	
+		</div>
+		
+		
 	</div>
+	
 
 
 </body>

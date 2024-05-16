@@ -1,12 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Add Course</title>
 </head>
 <script src = "js/validation.js" ></script>
+<!--  add bootstrap  -->
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <style>
 * {
@@ -51,7 +54,12 @@ input[type="submit"]:hover {
 	background-color: #45a049;
 }
 
-
+input[type="number"] {
+	padding : 7px 10px ; 
+	border-radius : 5px;
+	border: 1px solid #ccc;
+	
+}
 </style>
 <body>
 	
@@ -102,10 +110,10 @@ input[type="submit"]:hover {
 	<form method="post" action="AddCourseServlet">
 		<input name='id' type="text" name="id" placeholder="ID" value="<%= current_id%>"> 
 		<input name='name' type="text" name="name" placeholder="Name" value="<%= current_name%>"> 
-		<input name='year' type="number" min="1900" max="2099" step="1" value="2024" value="<%= current_year%>"/>
+		<input name='year' type="number" min="1900" max="2099" step="1" value="2024" placeholder= "Year" value="<%= current_year%>"/>
 		<input name='lecture' type="text" name="lecture" placeholder="lecture" value="<%= current_lecture%>">
 		<input name='notes' type="text" name="notes" placeholder="Notes" value="<%= current_note%>">
-		<button type="submit" >Submit</button>
+		<button class= 'btn btn-success' type="submit" >Submit</button>
 	</form>
 	
 	

@@ -117,11 +117,6 @@ tr:hover {
 
 
 
-
-
-
-
-
 	<table border="1">
 		<tr>
 

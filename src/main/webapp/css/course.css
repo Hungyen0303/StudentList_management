@@ -59,7 +59,10 @@ tr:nth-child(even) {
 tr:hover {
 	background-color: #ddd;
 }
-
+.btn-group 
+{
+	margin-top: 10px; 
+}
 .button-group
 {
 	display: flex;

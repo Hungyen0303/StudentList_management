@@ -100,7 +100,8 @@
 		<% for (Student student : students) { %>
 		<tr>
 			<td><%= student.getId() %></td>
-			<td><%= student.getName() %></td>
+			<td><%= student.getName() %></td> 
+<%-- 			<% System.out.println(student.getName()); %> --%>
 			<td><%= student.getBirthday() %></td>
 			<td><%= student.getAddress() %></td>
 			<td><%= student.getNotes() %></td>

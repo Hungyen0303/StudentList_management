@@ -39,7 +39,7 @@
 	
 	<div class = "container">
 		<div class= "title"><h2>Update student: <%= a.getId() %></h2></div>
-		<form class="btn-group" method="post" action="updateStudentServlet">
+		<form class="btn-group" method="post" action="updateStudentServlet" accept-charset="UTF-8">
 			<input name='id'  type="text" value="<%= a.getId() %>" readonly> 
 			<input name='name' type="text" value="<%= a.getName() %>"> 
 			<input name='dob' type="date" value="<%= a.getBirthday() %>"> 
