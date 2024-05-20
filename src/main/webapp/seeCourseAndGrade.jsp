@@ -134,7 +134,7 @@ tr:hover {
 		</tr>
 		<% } %>
 	</table>
-	<form action="course_student.jsp">
+	<form action="studentList.jsp">
 		<input type="submit" value="Back">
 	</form>
 </body>

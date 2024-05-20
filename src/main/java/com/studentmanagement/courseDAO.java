@@ -171,12 +171,11 @@ public class courseDAO {
             stmt.setString(4, year);
             stmt.setString(3, lecture);
             stmt.setString(5, notes);
-
             stmt.executeUpdate();
         }
     }
 
-    public void addStudentToCourse(String id_student ,String id_course) throws SQLException {
+    public void addStudentToCourse(String id_student ,String id_course, String grade) throws SQLException {
     	// for check key exist or not 
     	boolean isKeyExist = false ; 
     	while (!isKeyExist) {
@@ -194,7 +193,6 @@ public class courseDAO {
                         int count = resultSet.getInt(1);
                         if (count !=  1 ) {  isKeyExist  = true;  }                     
                         else { course.number ++; } 
-                        System.out.println("Count " + count + "number " + course.number );
                     }
                 }
             }}
@@ -203,7 +201,9 @@ public class courseDAO {
             stmt.setString(1, Integer.toString(course.number));
             stmt.setString(2, id_student);
             stmt.setString(3, id_course);
-            stmt.setNull(4,Types.DOUBLE);
+            if (grade.isEmpty()) 
+            	stmt.setDouble(4,0 );
+            else  stmt.setDouble(4, Double.parseDouble(grade) );
             course.number++;
             stmt.executeUpdate();
         }

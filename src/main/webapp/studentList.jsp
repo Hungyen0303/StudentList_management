@@ -1,4 +1,5 @@
-<%@ page import="java.util.ArrayList, java.util.Date, java.util.List, java.sql.Connection, java.sql.DriverManager, java.sql.SQLException, java.util.Collections, java.util.Comparator"%>
+<%@ page import="java.util.ArrayList, java.util.Date, java.util.List, java.sql.Connection, 
+java.sql.DriverManager, java.sql.SQLException, java.util.Collections, java.util.Comparator, java.text.Normalizer, java.util.regex.Pattern"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.studentmanagement.Student"%>
 <%@ page import="com.studentmanagement.StudentDAO"%>
@@ -24,31 +25,40 @@
 
 <body>
 	<%
-	
-	String sortType = request.getParameter("sortType");
+    String sortType = request.getParameter("sortType");
     String searchName = request.getParameter("searchName");
-    String url = "jdbc:postgresql://localhost:5432/QLHS"; // 
-	String username = "y"; 
-	String password = "123"; 
-	List<Student> students = new ArrayList<>();
+    String url = "jdbc:postgresql://localhost:5432/QLHS";
+    String username = "y";
+    String password = "123";
+    List<Student> students = new ArrayList<>();
 
-	try {
-	
-    Class.forName("org.postgresql.Driver");
-    Connection connection = DriverManager.getConnection(url, username, password);
+    try {
+        Class.forName("org.postgresql.Driver");
+        Connection connection = DriverManager.getConnection(url, username, password);
 
-    if (connection != null) {
-        StudentDAO stu_dao = new StudentDAO(connection) ; 
-        students = stu_dao.getAllStudents();
-        
-        connection.close();
-    }} catch (ClassNotFoundException e) {
-    System.out.println("PostgreSQL JDBC driver not found.");
-    e.printStackTrace();} catch (SQLException e) {
-    System.out.println("Failed to connect to PostgreSQL database.");
-    System.out.println("Error: " + e.getMessage());}
-   
-	if (searchName != null && !searchName.isEmpty()) {
+        if (connection != null) {
+            StudentDAO stu_dao = new StudentDAO(connection);
+            students = stu_dao.getAllStudents();
+            connection.close();
+        }
+    } catch (ClassNotFoundException e) {
+        System.out.println("PostgreSQL JDBC driver not found.");
+        e.printStackTrace();
+    } catch (SQLException e) {
+        System.out.println("Failed to connect to PostgreSQL database.");
+        System.out.println("Error: " + e.getMessage());
+    } finally
+    {
+    	
+    }
+
+    // Sắp xếp danh sách sinh viên theo tên nếu có yêu cầu sắp xếp
+    if (sortType != null && (sortType.equals("asc") || sortType.equals("desc"))) {
+        Collections.sort(students, sortType.equals("desc") ? Comparator.comparing(Student::getName).reversed() : Comparator.comparing(Student::getName));
+    }
+
+    // Nếu có yêu cầu tìm kiếm theo tên, lọc danh sách sinh viên phù hợp
+    if (searchName != null && !searchName.isEmpty()) {
         List<Student> filteredStudents = new ArrayList<>();
         for (Student student : students) {
             if (student.getName().toLowerCase().contains(searchName.toLowerCase())) {
@@ -57,13 +67,7 @@
         }
         students = filteredStudents;
     }
-    // Sắp xếp danh sách sinh viên theo tên nếu có yêu cầu sắp xếp
-    if (sortType != null && (sortType.equals("asc") || sortType.equals("desc"))) {
-        Collections.sort(students, sortType.equals("desc") ? Comparator.comparing(Student::getName).reversed() : Comparator.comparing(Student::getName));
-    }
-
-    // Nếu có yêu cầu tìm kiếm theo tên, lọc danh sách sinh viên phù hợp
-    %>
+%>
 
 	<h2><strong>Student List</strong></h2>
 	
@@ -83,6 +87,7 @@
     <div class='overlay' id='overlay'></div>
 
 	
+	
 	<div class = "container-xxl">
 	
 	
@@ -97,7 +102,9 @@
 			<th></th>
 		</tr>
 		<!-- Iterate through the list of students -->
-		<% for (Student student : students) { %>
+		<% 
+		for (Student student : students) {
+		%>
 		<tr>
 			<td><%= student.getId() %></td>
 			<td><%= student.getName() %></td> 
@@ -116,13 +123,17 @@
 					</form>
 					<!-- Button to delete a student -->
 					<button class="button button-delete" onclick='showPopup(<%= student.getId() %>)'> Delete </button>
+					<form style="margin-left: 5px;" method="post" action="seeCourseAndGrade.jsp" >
+							<input type="hidden" name="id_student" value="<%= student.getId() %>">
+							<input class="btn__seecourse" type="submit" value="See course and grade">
+					</form>
 				</div>
 				
 			</td>
 			
 			
 		</tr>
-		<% } %>
+		<%} %>
 	</table>
 	
 	

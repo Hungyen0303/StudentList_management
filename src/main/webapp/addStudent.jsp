@@ -56,7 +56,7 @@ background-color: #ffffff  ;
 		out.println("<p style='color: red; text-transform: uppercase;' >ex: 21120372 </p>");
 	}
 	%>
-	<form method="post" action="AddStudentServlet" accept-charset="UTF-8">
+	<form method="post" action="AddStudentServlet" >
 	<input name='id' type="text" name="id" placeholder="ID" value="<%= current_id%>"> 
 		<input name='name' type="text" name="name" placeholder="Name" value="<%= current_name%>"> 
 		<input name='dob' type="date"  value="<%= current_dob%>"/>

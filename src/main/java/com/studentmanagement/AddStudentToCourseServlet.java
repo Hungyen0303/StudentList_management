@@ -22,7 +22,9 @@ public class AddStudentToCourseServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String id_student = request.getParameter("id_student");
+        System.out.println("*//*" + id_student);
         String id_course = request.getParameter("id_course");
+        String grade = request.getParameter("grade");
         
         String url = "jdbc:postgresql://localhost:5432/QLHS"; 
     	String username = "y"; 
@@ -35,9 +37,8 @@ public class AddStudentToCourseServlet extends HttpServlet {
 
         if (connection != null) {
             courseDAO stu_dao = new courseDAO(connection) ; 
-            stu_dao.addStudentToCourse(id_student , id_course);
+            stu_dao.addStudentToCourse(id_student , id_course, grade );
             String link_to_studentLIst= "http://localhost:8080/demo/addStudentToCourse.jsp?id_course="+id_course+"&message="+"success"  ;
-            
             System.out.println("link to redirect " + link_to_studentLIst);
             response.sendRedirect(link_to_studentLIst);
            

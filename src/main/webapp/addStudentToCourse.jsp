@@ -9,6 +9,13 @@
 <meta charset="UTF-8">
 <title>Student List</title>
 </head>
+
+<script src= "js/handlePopUp.js"></script>
+<link href = "css/PopUp.css" rel="stylesheet" >
+<!--  add bootstrap  -->
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <style>
 * {
 	margin: 0;
@@ -29,10 +36,7 @@ body {
 
 h2 {
 	margin: 20px 0;
-}
-
-form {
-	margin-top: 10px;
+	color : 
 }
 
 input[type="text"], input[type="submit"] {
@@ -75,19 +79,25 @@ tr:hover {
 	background-color: #ddd;
 }
 
-.btn-container {
-	display: flex;
-	margin-top: 20px;
+p{margin : 0;}
+.btn_close
+{
+	background-color : #6c757d;
+	color : white ; 
+	padding :0 0.5rem; 
+	height : 41.6px	 ;
+	border : none; 
+	border-radius : 5px ;
 }
 
-.btn-container form {
-	margin-right: 10px;
+.popup {
+    height: 10%;
+    justify-content : start;
+    align-items : center ;
+    gap : 5px;
 }
-
-h4 {
-	color: #45a049;
-	margin-top: 20px;
-	text-size: 20px;
+.overlay{
+ 	background-color: rgba(0, 0, 0, 0.11);
 }
 </style>
 <body>
@@ -117,7 +127,23 @@ h4 {
 %>
 
 	<h2>Student List did not join</h2>
-
+	
+	<div class='popup' id='enterGrade' >
+	<div class= "d-flex align-items-center"><p> Nhập điểm </p></div>
+	<div class= "d-flex">  
+	<form method="post" action="AddStudentToCourseServlet">	
+					<input id="id_student" type="hidden" name="id_student" value=""> 
+					<input type="hidden" name="id_course" value="<%= id_course %>">
+					<input type="text" name="grade" value="" placeholder="Bằng 0 nếu không nhập ">
+					<input type="submit" value=Add>
+					
+	</form>
+	<div class= "d-flex align-items-center"><button class = "btn_close" onclick="hideUpGrade()">Close</button></div>
+	</div>
+  
+	</div>
+    <div class='overlay' id='overlay'></div>
+	
 	<table border="1">
 		<tr>
 			<th>ID</th>
@@ -133,16 +159,12 @@ h4 {
 			<td><%= student.getId() %></td>
 			<td><%= student.getName() %></td>
 			<td><%= student.getBirthday() %></td>
-			<td><%= student.getAddress() %></td>
+			<td><%= student.getAddress() %></td>	
 			<td><%= student.getNotes() %></td>
 			<!-- Button to update a student -->
 			<td>
-				<form method="post" action="AddStudentToCourseServlet">
-					<input type="hidden" name="id_student"
-						value="<%= student.getId() %>"> <input type="hidden"
-						name="id_course" value="<%= id_course %>"> <input
-						type="submit" value=Add>
-				</form>
+				<button class="btn btn-success" onclick="showPopUpGrade(<%= student.getId()%>)">Add</button>
+
 			</td>
 
 		</tr>
@@ -154,7 +176,7 @@ h4 {
 	<h4>Add successfully</h4>
 	<% } %>
 	<form action="StudentlistFiltered.jsp?id = <%= id_course %> ">
-		<input type="submit" value="Back"> <input type="hidden"
+		<input type="submit" value=	"Back"> <input type="hidden"
 			name="id" value="<%= id_course %>">
 	</form>
 </body>

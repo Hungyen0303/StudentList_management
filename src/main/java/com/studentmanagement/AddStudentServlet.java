@@ -39,6 +39,7 @@ public class AddStudentServlet extends HttpServlet {
     	String current_info = "&id=" + id + "&name="  + name + "&dob="+dob + 
     			"&address="+ address + "&notes=" + notes; 
     	System.out.println(current_info);
+    	System.out.println(dob.length() == 0);
     	if ( name.length()==0 || dob.length() == 0 || address.length() == 0 ) 
     	{
     		String link_to_studentLIst= "http://localhost:8080/demo/addStudent.jsp?valid=blank"+ current_info;

@@ -47,7 +47,6 @@ public class Student {
     public String getName() {
         return this.name; 
     }
-
     public String getBirthday() {
 
         return this.birthday;

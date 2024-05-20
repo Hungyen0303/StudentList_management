@@ -66,16 +66,19 @@ form {
 	background-color: #ccc;
 	border-radius: 10px;
 	border: none;
-	color : white;
+	color : #0003ff;
 }
 .back-button
 {
 	background-color: #ccc;
+
 }
 input[name="searchYear"] 
 {
 	padding: 10px 10px;
 	border-radius: 10px;
+	width: 10rem;
+	border: none;
 }
 .stick
 {
@@ -90,8 +93,9 @@ input[name="searchYear"]
 
 h2
 {
-	font-weight: 500;
+	font-weight: 500; 
 }
+
 
 
 

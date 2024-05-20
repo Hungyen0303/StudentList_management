@@ -71,12 +71,7 @@
 	
 	
 				<td>
-					<form method="post" action="seeCourseAndGrade.jsp" >
-						<input type="hidden" name="id_student"
-							value="<%= cs.getStudent_id() %>"> 
-							<input class="btn__seecourse" type="submit"
-							value="See course and grade">
-					</form>
+				
 				</td>
 			</tr>
 			<% } %>

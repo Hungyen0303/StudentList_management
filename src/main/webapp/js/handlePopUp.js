@@ -12,3 +12,16 @@ function hidePopup() {
     document.getElementById("overlay").style.display = "none";
 }
 
+function hideUpGrade()
+{
+	document.getElementById("enterGrade").style.display="none";
+	document.getElementById("overlay").style.display = "none";
+}
+function showPopUpGrade(id_student)
+{
+	document.getElementById("enterGrade").style.display="flex";
+	document.getElementById("overlay").style.display = "block";
+    document.getElementById("id_student").value = id_student;
+  
+}
+

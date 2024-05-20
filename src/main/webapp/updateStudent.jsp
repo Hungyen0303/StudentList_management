@@ -1,7 +1,5 @@
-
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page
-	import="java.util.ArrayList, java.util.Date, java.util.List, java.sql.Connection
+<%@ page import="java.util.ArrayList, java.util.Date, java.util.List, java.sql.Connection
 , java.sql.DriverManager, java.sql.SQLException, java.util.Collections, java.util.Comparator,java.util.*"%>
 <%@ page import="com.studentmanagement.Student"%>
 <%@ page import="com.studentmanagement.StudentDAO"%>
