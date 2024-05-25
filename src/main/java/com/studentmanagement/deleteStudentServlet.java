@@ -39,7 +39,6 @@ public class deleteStudentServlet extends HttpServlet {
             e.printStackTrace();} 
         	catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
-         
             } 
         	}
 }

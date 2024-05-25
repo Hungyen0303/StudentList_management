@@ -43,7 +43,7 @@ public class StudentDAO {
     // Method to get all students from database
     public List<Student> getAllStudents() throws SQLException {
         List<Student> students = new ArrayList<>();
-        String query = "SELECT * FROM student_QLHS";
+        String query = "SELECT * FROM Student_QLHS";
 
         try (PreparedStatement stmt = connection.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {

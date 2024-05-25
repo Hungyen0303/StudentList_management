@@ -37,6 +37,7 @@ java.sql.DriverManager, java.sql.SQLException, java.util.Collections, java.util.
         Connection connection = DriverManager.getConnection(url, username, password);
 
         if (connection != null) {
+        	System.out.println("Connect successful");
             StudentDAO stu_dao = new StudentDAO(connection);
             students = stu_dao.getAllStudents();
             connection.close();
@@ -73,7 +74,6 @@ java.sql.DriverManager, java.sql.SQLException, java.util.Collections, java.util.
 	
 	<!-- Pop up to confirm delete or not  -->
 	<div class='popup' id='errorPopup' >
-
 	<p> Bạn có muốn tiếp tục xoá </p>
 	<div class= "d-flex gr-button">  
 	<button onclick='hidePopup()'>Close</button>

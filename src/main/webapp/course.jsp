@@ -75,20 +75,18 @@
 
 
 
-	<h2>
-	Course List</h2>
-
+	<h2>Course List</h2>
 	<div class='popup' id='errorPopup' >
-		<p> Bạn có chắc chắn xoá khoá học này ? </p>
-		<div class= "d-flex gr-button">  
-			<button onclick='hidePopup()'>Close</button>
-		    <form action="deleteStudentServlet" method="post">
-		    	<input type="hidden" id="id" name="id" value = "">
-				<input class="button-continue" type="submit" value="Continue">
-			</form>
-		</div>
+	<p> Bạn có muốn tiếp tục xoá </p>
+	<div class= "d-flex gr-button">  
+	<button onclick='hidePopup()'>Close</button>
+    <form action="deletecourseServlet" method="post">
+    	<input type="hidden" id="id" name="id" value = "">
+		<input class="button-continue" type="submit" value="Continue">
+	</form>
 	</div>
-	
+	</div>
+    <div class='overlay' id='overlay'></div>
 
 
 
@@ -119,7 +117,7 @@
 						type="submit" value="Update">
 				</form>
 				
-				<button class= "button button-delete" type = "button" onclick = 'showPopup("<%= c.getId() %>")' class = "btn btn-danger"> Delete </button>
+				<button class= "button button-delete" type = "button" onclick = "showPopup('<%=c.getId()%>')" class = "btn btn-danger"> Delete </button>
 				
 				<form action="StudentlistFiltered.jsp" method="post">
 					<input type="hidden" name="id" value="<%= c.getId() %>"> <input

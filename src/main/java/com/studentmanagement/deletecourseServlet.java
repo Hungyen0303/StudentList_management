@@ -22,7 +22,7 @@ public class deletecourseServlet extends HttpServlet {
             String url = "jdbc:postgresql://localhost:5432/QLHS"; 
         	String username = "y"; 
         	String password = "123"; 
-     
+        	System.out.println("id just get" + id);
         	try {
         	
             Class.forName("org.postgresql.Driver");
